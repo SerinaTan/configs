@@ -1,0 +1,87 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+Plugin 'flazz/vim-colorschemes'
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tikhomirov/vim-glsl'
+
+Plugin 'elzr/vim-json'
+
+Plugin 'scrooloose/nerdtree'
+
+"Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'michaeljsmith/vim-indent-object'
+
+Plugin 'vim-airline/vim-airline'
+
+Plugin 'vim-airline/vim-airline-themes'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+"colorscheme molokai
+colorscheme candyman 
+
+autocmd! BufNewFile,BufRead *.vs,*.fs,*.tcs,*.tes set ft=glsl
+autocmd vimenter * NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+syntax on
+filetype plugin indent on
+
+" key bindings
+
+nmap <S-Enter> O<Esc>j
+nmap <CR> o<Esc>k
+nmap f 0 
+nmap z $ 
+:imap ;; <Esc>
+
+inoremap {<CR> {<CR>}<C-o>O
+
+map gn :bn<cr>
+map gp :bp<cr>
+map gd :bd<cr>
+
+" auto indent pasted text
+:nnoremap p p=`]
+:nnoremap <c-p> p
+
+
+
+" variable configs
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set mouse=a
+:set number
+
+" somehow fixes VIM in tmux
+set t_ut=
+
+let g:NERDTreeWinSize=25
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline_theme='luna'
