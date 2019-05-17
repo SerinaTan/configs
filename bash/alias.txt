@@ -1,0 +1,11 @@
+# aliasing stuff
+# nv-nsight-cu-cli -f -k vlc_encode_kernel_sm64huff -c 1 --section MemoryWorkloadAnalysis --csv ./app
+alias new="tmux -2 new -s"
+alias goto="tmux -2 attach-session -t"
+alias smi="nvidia-smi"
+alias dimages="docker images"
+alias dcontainers="docker container ls"
+alias drun="docker run --privileged -dit --runtime=nvidia -v /home/serinatan/Serina/research:/mnt --name sim simulator_img:latest"
+alias dexec="docker exec -it sim /bin/bash"
+
+alias runvnc="vncserver -geometry 1920x1080 -depth 24 :27"
