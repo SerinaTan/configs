@@ -55,8 +55,8 @@ filetype plugin indent on
 
 nmap <S-Enter> O<Esc>j
 nmap <CR> o<Esc>k
-nmap f 0 
-nmap z $ 
+:nnoremap <S-f> 0 
+nmap <S-z> $ 
 :imap ;; <Esc>
 
 inoremap {<CR> {<CR>}<C-o>O
@@ -69,14 +69,17 @@ map gd :bd<cr>
 :nnoremap p p=`]
 :nnoremap <c-p> p
 
-
+" folding
+nnoremap <space> za
 
 " variable configs
 set tabstop=2
 set shiftwidth=2
 set expandtab
 set mouse=a
-:set number
+set number
+set foldmethod=indent
+set foldnestmax=2
 
 " somehow fixes VIM in tmux
 set t_ut=
@@ -85,3 +88,5 @@ let g:NERDTreeWinSize=25
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline_theme='luna'
+
+
