@@ -57,7 +57,7 @@ nmap <S-Enter> O<Esc>j
 nmap <CR> o<Esc>k
 :nnoremap <S-f> 0 
 nmap <S-z> $ 
-:imap ;; <Esc>
+:imap jj <Esc>
 
 inoremap {<CR> {<CR>}<C-o>O
 
@@ -66,7 +66,7 @@ map gp :bp<cr>
 map gd :bd<cr>
 
 " auto indent pasted text
-:nnoremap p p=`]
+:nnoremap p p=`]<C-o>
 :nnoremap <c-p> p
 
 " folding
