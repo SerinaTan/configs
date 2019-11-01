@@ -12,5 +12,6 @@ alias tbdexec="docker exec -u $(id -u):$(id -g) -it tbd_tf /bin/bash"
 
 
 alias runvnc="vncserver -geometry 1920x1080 -depth 24 :27"
+alias fixssh="eval $(tmux show-env -s |grep '^SSH_')"
 
 
