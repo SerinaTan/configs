@@ -1,0 +1,144 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="/home/serinatan/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="pygmalion-virtualenv"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+DISABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git
+        virtualenv
+        docker)
+
+source $ZSH/oh-my-zsh.sh
+
+unsetopt correct_all
+
+# User configuration
+# Use vim keybindings
+bindkey -v
+
+bindkey "^R" history-incremental-search-backward
+bindkey -M viins ';;' vi-cmd-mode
+
+up() {
+    # default parameter to 1 if non provided
+    declare -i d=${@:-1}
+    # ensure given parameter is non-negative. Print error and return if it is
+    (( $d < 0 )) && (>&2 echo "up: Error: negative value provided") && return 1;
+     # remove last d directories from pwd, append "/" in case result is empty
+    cd "$(pwd | sed -E 's;(/[^/]*){0,'$d'}$;;')/";
+}
+
+# add ssh key
+eval `ssh-agent`
+ssh-add ~/.ssh/github
+ssh-add ~/.ssh/id_rsa
+
+# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/cuda/NsightCompute-2019.3:$PATH"
+export PATH="/usr/local/cuda/bin:$PATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+#
+# nv-nsight-cu-cli -f -k vlc_encode_kernel_sm64huff -c 1 --section MemoryWorkloadAnalysis --csv ./app
+alias new="tmux -2 new -s"
+alias goto="tmux -2 attach-session -t"
+alias smi="nvidia-smi"
+alias dimages="docker images"
+alias dcontainers="docker container ls"
+alias drun="docker run --privileged -dit --runtime=nvidia -v /home/serinatan/Serina/research:/mnt --name sim simulator_img:latest"
+alias dexec="docker exec -it sim /bin/bash"
+alias tbdrun="docker run --privileged --runtime=nvidia -dit -v /home/serinatan/Serina/research/:/mnt --name tbd_tf tf:latest"
+alias tbdexec="docker exec -u $(id -u):$(id -g) -it tbd_tf /bin/bash"
+alias myip="ip addr show"
+
+alias simdocker="docker run --privileged -dit -h docker.example.com -p 10023:22 --ipc=host --runtime=nvidia --hostname working -v /home/serinatan/project:/mnt --name clean gpusim90:latest"
+
+alias runvnc="vncserver -geometry 1920x1080 -depth 24 :27"
+alias deploy-gard="fab deploy --git-user SerinaTan --ssh-user serinatan --git-ssh-key $HOME/.ssh/github"
+
+export CUDA_INSTALL_PATH=/usr/local/cuda
