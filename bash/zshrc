@@ -77,6 +77,8 @@ plugins=(git
 source $ZSH/oh-my-zsh.sh
 #source $ZSH/prompt.zsh
 
+GIT_AUTO_FETCH_INTERVAL=180 #in seconds
+
 unsetopt correct_all
 
 # User configuration
