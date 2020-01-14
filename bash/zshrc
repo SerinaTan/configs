@@ -97,6 +97,9 @@ up() {
     cd "$(pwd | sed -E 's;(/[^/]*){0,'$d'}$;;')/";
 }
 
+precmd () { print -Pn "\e]0;$TITLE\a" }
+title() { export TITLE="$*" }
+
 # add ssh key
 eval `ssh-agent`
 ssh-add ~/.ssh/github
