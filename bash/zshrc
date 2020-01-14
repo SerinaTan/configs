@@ -133,7 +133,7 @@ export PATH="/usr/local/cuda/bin:$PATH"
 #
 # nv-nsight-cu-cli -f -k vlc_encode_kernel_sm64huff -c 1 --section MemoryWorkloadAnalysis --csv ./app
 alias new="tmux -2 new -s"
-alias goto="tmux -2 attach-session -t"
+alias goto="tmux -2 attach-session -d -t"
 alias smi="nvidia-smi"
 alias dimages="docker images"
 alias dcontainers="docker container ls"
