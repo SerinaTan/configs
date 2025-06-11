@@ -105,10 +105,6 @@ eval `ssh-agent`
 ssh-add ~/.ssh/github
 ssh-add ~/.ssh/id_rsa
 
-# export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/usr/local/cuda/NsightCompute-2019.3:$PATH"
-export PATH="/usr/local/cuda/bin:$PATH"
-
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
@@ -134,18 +130,29 @@ export LANG=en_US.UTF-8
 # nv-nsight-cu-cli -f -k vlc_encode_kernel_sm64huff -c 1 --section MemoryWorkloadAnalysis --csv ./app
 alias new="tmux -2 new -s"
 alias goto="tmux -2 attach-session -d -t"
-alias smi="nvidia-smi"
-alias dimages="docker images"
-alias dcontainers="docker container ls"
-alias drun="docker run --privileged -dit --runtime=nvidia -v /home/serinatan/Serina/research:/mnt --name sim simulator_img:latest"
-alias dexec="docker exec -it sim /bin/bash"
-alias tbdrun="docker run --privileged --runtime=nvidia -dit -v /home/serinatan/Serina/research/:/mnt --name tbd_tf tf:latest"
-alias tbdexec="docker exec -u $(id -u):$(id -g) -it tbd_tf /bin/bash"
-alias myip="ip addr show"
 
-alias simdocker="docker run --privileged -dit -h docker.example.com -p 10023:22 --ipc=host --runtime=nvidia --hostname working -v /home/serinatan/project:/mnt --name clean gpusim90:latest"
 
-alias runvnc="vncserver -geometry 1920x1080 -depth 24 :27"
-alias deploy-gard="fab deploy --git-user SerinaTan --ssh-user serinatan --git-ssh-key $HOME/.ssh/github"
+alias gca="git commit --amend"
+alias gpr="git pull --rebase"
+alias gri="git rebase -i"
+alias grc="git rebase --continue"
+alias gra="git rebase --abort"
 
-export CUDA_INSTALL_PATH=/usr/local/cuda
+
+fp() {
+git log --grep=$1
+}
+
+gt() {
+git checkout -f master
+x=$(git log --grep=$1 | grep "commit")
+y=$(echo $x | awk 'END {print $2}')
+git checkout $y
+}
+
+gtp() {
+gt $1
+git checkout HEAD~1
+}
+
+
